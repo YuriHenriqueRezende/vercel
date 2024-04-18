@@ -11,8 +11,6 @@
         password: ''
     });
 
-
-
     //para lidar com promises, podemos usar o try/catch com o async/await    
     /*const submitLogin = async()=>{
         console.log("trying to login with credentials below:", credentials);
