@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from "#imports";
 import { carrinho, type CarrinhoLivro } from "~/estoque/carrinho";
-
 const { getCarrinho, removertLivroCarrinho, getValorLivro } = carrinho();
+import { BACKEND_URL } from "~/models/app";
 
 const itensNoCarrinho: Array<CarrinhoLivro> = getCarrinho();
 const valorTotal = computed(()=> getValorLivro());
@@ -17,6 +17,16 @@ const deletarDoCarrinho = (itemParaRemover: CarrinhoLivro)=> {
 }
 
 const salvarPedido = ()=> {
+   useFetch(`${BACKEND_URL}/emprestimos/`, {
+    method: 'POST',
+    body: { 
+      livroFK: itensNoCarrinho,
+      data_inicio: '2024-05-27',
+      data_fim: '2024-05-31',
+      status: 'E',
+      usuarioFK: '7',
+    }
+  })
   navigateTo('/login/login_emprestimo');
 }
 </script>

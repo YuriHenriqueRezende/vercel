@@ -1,7 +1,10 @@
 <script setup>
+
     const route = useRoute();
 
     const { data: livro } = await useFetch(`http://127.0.0.1:8000/api/auth/livros/${route.params.id}`, {key: 'tripRequest'});
+    const { data: autor } = await useFetch (`http://127.0.0.1:8000/api/auth/usuarios/${livro.value.autor}`)
+    console.log(livro.value.autor)
 
 </script>
 
@@ -15,9 +18,10 @@
         <p> Numero de Paginas: {{ livro.numero_pagina }} </p>
         <p> Formato: {{ livro.formato }} </p>
         <p> Numero da edição: {{ livro.numero_edicao }} </p>
-        <p> Autor: {{ livro.autor }} </p>
+        <p> Autor: {{ autor.nome }} </p>
+        <img :src="autor.foto" alt="solicitante">
+        <p> biografia: {{ autor.biografia }} </p>
         <p> Ano de Publicação: {{ livro.publicacao }} </p>
-        <p> Categoria: {{ livro.categoriaFK }} </p>
         <p> Preço: {{ livro.preco }} </p>
         <p> Quantidade: {{ livro.quantidade }} </p>
         
